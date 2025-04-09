@@ -3,6 +3,8 @@ import exception.CategoryNotFoundException;
 import helper.InputHelper;
 import model.Category;
 
+import static helper.Colors.*;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -13,45 +15,54 @@ public class Main {
 
         boolean running = true;
         while (running){
-            System.out.println("Library Management System");
-            System.out.println("1. Add Category");
-            System.out.println("2. List Categories");
-            System.out.println("3. Delete Category");
-            System.out.println("4. Update Category");
-            System.out.println("5. Create New Book");
-            System.out.println("6. Show All Books");
-            System.out.println("7. Delete Book");
-            System.out.println("8. Update Book");
-            System.out.println("9. Exit");
+            System.out.println(TEXT_RED+" L I B R A R Y     M A N A G E M E N T     S Y S T E M "+TEXT_WHITE);
+            System.out.println(TEXT_PURPLE+ "1. Add Category");
+            System.out.println(TEXT_CYAN + "2. List Categories");
+            System.out.println(TEXT_YELLOW +"3. Delete Category");
+            System.out.println(TEXT_BRIGHT_CYAN + "4. Update Category");
+            System.out.println(TEXT_GREEN + "5. Create New Book");
+            System.out.println(TEXT_BLUE + "6. Show All Books");
+            System.out.println(TEXT_BRIGHT_PURPLE + "7. Delete Book");
+            System.out.println(TEXT_BRIGHT_YELLOW + "8. Update Book");
+            System.out.println(TEXT_BRIGHT_GREEN+ "9. Exit");
 
 
-            int choice = InputHelper.readInt("Choice: ");
+            int choice = InputHelper.readInt(TEXT_RESET+ "Choice: " + TEXT_RESET);
             switch(choice){
                 case 1:
-                    String categoryName = InputHelper.readLine("Category Name: ");
+                    String categoryName = InputHelper.readLine("Enter the category Name: ");
                     libraryManager.createCategory(categoryName);
                     break;
 
                 case 2:
-                    System.out.println("Category List: ");
+                    System.out.println(TEXT_BRIGHT_BLUE + "Category List: " + TEXT_RESET);
                     libraryManager.allCategories();
                     break;
+
                 case 3:
-                    System.out.println("Which category do you want to delete?");
+                    System.out.print(TEXT_RED + "Which category do you want to delete?" + TEXT_RED);
+                    if(libraryManager.getAllCategories().isEmpty()){
+                        System.out.println("No categories found");
+                        break;
+                    }
                     while (true){
                         int categoryID = InputHelper.readInt("Category ID: ");
                         try {
                             libraryManager.deleteCategory(categoryID);
                             break;
                         }catch (CategoryNotFoundException e){
-                            System.out.println("Category not found write right id");
+                            System.out.println(TEXT_BRIGHT_RED + "Category not found write right id" + TEXT_BRIGHT_RED);
                         }
 
                     }
                     break;
 
                 case 4:
-                    System.out.println("Which category do you want to update?");
+                    System.out.print(TEXT_YELLOW + "Which category do you want to update?" + TEXT_YELLOW);
+                    if (libraryManager.getAllCategories().isEmpty()) {
+                        System.out.println("No categories found");
+                        break;
+                    }
                     while (true){
                         int updatedCategoryID = InputHelper.readInt("Category ID: ");
                         try{
@@ -59,7 +70,7 @@ public class Main {
                             libraryManager.updateCategory(updatedCategoryID,newCategoryName);
                             break;
                         }catch (CategoryNotFoundException e){
-                            System.out.println("Category not found write right id");
+                            System.out.println(TEXT_BRIGHT_YELLOW + "Category not found write right id" + TEXT_BRIGHT_YELLOW);
                         }
 
                     }
@@ -91,21 +102,21 @@ public class Main {
                     break;
 
                 case 7:
-                    System.out.println("Which book do you want to delete?");
+                    System.out.println(TEXT_RED+"Which book do you want to delete?"+TEXT_RED);
                     while (true){
                         int bookID = InputHelper.readInt("Book ID: ");
                         try {
                             libraryManager.deleteBook(bookID);
                             break;
                         }catch (BookNotFoundException e){
-                            System.out.println("Book not found write right id");
+                            System.out.println(TEXT_BRIGHT_RED+"Book not found write right id"+TEXT_BRIGHT_RED);
                         }
 
                     }
                     break;
 
                 case 8:
-                    System.out.println("Which book do you want to update?");
+                    System.out.println(TEXT_YELLOW+"Which book do you want to update?"+TEXT_YELLOW);
                     while(true){
                         int updatedBookID = InputHelper.readInt("Book ID: ");
 

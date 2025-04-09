@@ -21,6 +21,9 @@ public class LibraryManager {
             System.out.println(c.getId()+". "+c.getCategoryName());
         }
     }
+    public List<Category> getAllCategories(){
+        return categories;
+    }
 
     public Category getCategoryById(int id){
         for (Category category: categories){

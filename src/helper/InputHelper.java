@@ -5,15 +5,15 @@ import java.util.Scanner;
 public class InputHelper {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static String readLine(String propmpt){
-        System.out.print(propmpt);
+    public static String readLine(String prompt){
+        System.out.print(prompt);
         return scanner.nextLine();
     }
 
-    public static int readInt(String propmpt){
-        System.out.println(propmpt);
+    public static int readInt(String prompt){
+        System.out.print(prompt);
         while (!scanner.hasNextInt()) {
-            System.out.println("Please enter a number");
+            System.out.print("Please enter a number");
             scanner.next();
         }
         int velue = scanner.nextInt();
