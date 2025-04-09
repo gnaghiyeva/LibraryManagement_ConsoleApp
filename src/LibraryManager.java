@@ -1,3 +1,4 @@
+import exception.BookNotFoundException;
 import exception.CategoryNotFoundException;
 import model.Book;
 import model.Category;
@@ -46,5 +47,51 @@ public class LibraryManager {
         }
         category.setCategoryName(newName);
         System.out.println("Updated Category: " + category.getCategoryName());
+    }
+
+//    ***********************  BOOK SECTION  ***********************
+
+    public void addBook(String title, String author, double price, int categoryId){
+        Category category = getCategoryById(categoryId);
+        if(category == null){
+            throw new IllegalArgumentException("Category not found");
+        }
+        books.add(new Book(bookIdCounter++,title,author,price,category));
+    }
+
+    public void allBook(){
+        for(Book b : books){
+            System.out.println(b.getId()+ ". " +b.getTitle()+"-"+b.getPrice()+" - "+b.getCategory().getCategoryName());
+        }
+    }
+
+    public Book getBookById(int id){
+        for (Book book: books){
+            if(book.getId() == id){
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public void deleteBook(int id) throws BookNotFoundException {
+        Book book = getBookById(id);
+        if(book == null){
+            throw new BookNotFoundException("Book not found");
+        }
+        books.remove(getBookById(id));
+        System.out.println("Deleted Book: " + book.getTitle());
+    }
+
+    public void updateBook(int id, String title, String author, double price, int categoryId) throws BookNotFoundException {
+        Book book = getBookById(id);
+        Category category = getCategoryById(categoryId);
+        if(book == null){
+            throw new BookNotFoundException("Book not found");
+        }
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setPrice(price);
+        book.setCategory(category);
     }
 }

@@ -4,14 +4,25 @@ public class Book {
     private int id;
     private String title;
     private String author;
+    private double price;
     private Category category;
 
-   public Book(int id, String title, String author, Category category){
+   public Book(int id, String title, String author, double price, Category category){
        this.id = id;
        this.title = title;
        this.author = author;
+       this.price = price;
        this.category = category;
+
    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public int getId() {
         return id;

@@ -1,5 +1,7 @@
+import exception.BookNotFoundException;
 import exception.CategoryNotFoundException;
 import helper.InputHelper;
+import model.Category;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -16,11 +18,11 @@ public class Main {
             System.out.println("2. List Categories");
             System.out.println("3. Delete Category");
             System.out.println("4. Update Category");
-            System.out.println("6. Create New Book");
-            System.out.println("7. Show All Books");
-            System.out.println("8. Delete Book");
-            System.out.println("9. Update Book");
-            System.out.println("10. Exit");
+            System.out.println("5. Create New Book");
+            System.out.println("6. Show All Books");
+            System.out.println("7. Delete Book");
+            System.out.println("8. Update Book");
+            System.out.println("9. Exit");
 
 
             int choice = InputHelper.readInt("Choice: ");
@@ -63,6 +65,63 @@ public class Main {
                     }
                     break;
 
+                case 5:
+                    String bookName = InputHelper.readLine("Book Name: ");
+                    String author = InputHelper.readLine("Author: ");
+                    int price = InputHelper.readInt("Price: ");
+
+                    int categoryId;
+
+                    while (true){
+                       categoryId = InputHelper.readInt("Category ID: ");
+
+                       if (libraryManager.getCategoryById(categoryId) == null){
+                           System.out.println("Category not found write right id");
+                       }
+                       else {
+                           break;
+                       }
+                    }
+                    libraryManager.addBook(bookName,author,price, categoryId);
+                    break;
+
+                case 6:
+                    System.out.println("All Books: ");
+                    libraryManager.allBook();
+                    break;
+
+                case 7:
+                    System.out.println("Which book do you want to delete?");
+                    while (true){
+                        int bookID = InputHelper.readInt("Book ID: ");
+                        try {
+                            libraryManager.deleteBook(bookID);
+                            break;
+                        }catch (BookNotFoundException e){
+                            System.out.println("Book not found write right id");
+                        }
+
+                    }
+                    break;
+
+                case 8:
+                    System.out.println("Which book do you want to update?");
+                    while(true){
+                        int updatedBookID = InputHelper.readInt("Book ID: ");
+
+                        try {
+                            String updatedBookName = InputHelper.readLine("New Book Name: ");
+                            String updatedAuthor = InputHelper.readLine("New Author: ");
+                            int updatedPrice = InputHelper.readInt("New Price: ");
+                            int updatedCategoryID = InputHelper.readInt("Category ID: ");
+
+                            libraryManager.updateBook(updatedBookID,updatedBookName,updatedAuthor,updatedPrice,updatedCategoryID);
+                            break;
+                        }catch (BookNotFoundException e){
+                            System.out.println("Book not found write right id");
+                        }
+                    }
+                    break;
             }
         }
     }
