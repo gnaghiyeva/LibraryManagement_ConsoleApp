@@ -6,6 +6,8 @@ import model.Category;
 import java.util.ArrayList;
 import java.util.List;
 
+import static helper.Colors.TEXT_RED;
+
 public class LibraryManager {
     private final List<Book> books = new ArrayList<>();
     private final List<Category> categories = new ArrayList<>();
@@ -96,5 +98,19 @@ public class LibraryManager {
         book.setAuthor(author);
         book.setPrice(price);
         book.setCategory(category);
+    }
+
+    public void searchBook(String keyword){
+        boolean found = false;
+        for(Book b : books){
+            if(b.getTitle().toLowerCase().contains(keyword.toLowerCase())){
+                System.out.println(b.getId()+ ". " +b.getTitle());
+                found = true;
+            }
+
+        }
+        if(!found){
+            System.out.println(TEXT_RED+ "No book found"+TEXT_RED);
+        }
     }
 }
