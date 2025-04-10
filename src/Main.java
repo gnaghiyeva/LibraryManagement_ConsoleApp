@@ -24,7 +24,8 @@ public class Main {
             System.out.println(TEXT_BLUE + "6. Show All Books");
             System.out.println(TEXT_BRIGHT_PURPLE + "7. Delete Book");
             System.out.println(TEXT_BRIGHT_YELLOW + "8. Update Book");
-            System.out.println(TEXT_BRIGHT_GREEN+ "9. Exit");
+            System.out.println(TEXT_BRIGHT_BLACK  + "9. Search Book");
+            System.out.println(TEXT_BRIGHT_GREEN+ "10. Exit");
 
 
             int choice = InputHelper.readInt(TEXT_RESET+ "Choice: " + TEXT_RESET);
@@ -132,6 +133,16 @@ public class Main {
                             System.out.println("Book not found write right id");
                         }
                     }
+                    break;
+
+                case 9:
+                    String keyword = InputHelper.readLine("Keyword: ");
+                    libraryManager.searchBook(keyword);
+                    break;
+
+                case 10:
+                    System.out.println("Good bye");
+                    System.exit(0);
                     break;
             }
         }
